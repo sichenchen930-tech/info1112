@@ -24,3 +24,24 @@ if [ ! -s "$1" ]; then
     echo "usage: the file is empty – no .bin file is produced"
     exit 1
 fi
+
+first_line=$(sed -n '1p' "$1")
+second_line=$(sed -n '2p' "$1")
+
+if [ "$first_line" -eq 0 ]; then
+    if [ "$second_line" = "QUIT,0,0" ]; then
+        echo "It is a QUIT program"
+
+        output_file="${1%.vsc}.bin"
+
+        printf '\x20\x00' > "$output_file"
+
+        echo "The content of the .bin file is"
+        xxd -p -c 1 "$output_file"
+
+        exit 0
+    else
+        echo "usage: invalid QUIT program – no .bin file is produced"
+        exit 1
+    fi
+fi
