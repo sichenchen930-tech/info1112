@@ -36,7 +36,6 @@ fi
 
 first_line=$(sed -n '1p' "$1")
 
-# Day 3:
 # First line can only be 0 or 2
 if [[ "$first_line" != "0" && "$first_line" != "2" ]]; then
     echo "usage: invalid first line – no .bin file is produced"
@@ -81,7 +80,6 @@ if [ "$first_line" -eq 2 ]; then
     value2=$(sed -n '3p' "$1")
 
 
-    # Day 3:
     # Check static values are integers
     if ! [[ "$value1" =~ ^[0-9]+$ ]]; then
         echo "usage: invalid static value – no .bin file is produced"
@@ -180,7 +178,6 @@ if [ "$first_line" -eq 2 ]; then
         esac
 
 
-        # Day 3:
         # Register must be 0, 1, 2 or 3
         if ! [[ "$reg" =~ ^[0-3]$ ]]; then
             echo "usage: invalid register – no .bin file is produced"
@@ -189,7 +186,6 @@ if [ "$first_line" -eq 2 ]; then
         fi
 
 
-        # Day 3:
         # Memory address must be an integer
         if ! [[ "$mem" =~ ^[0-9]+$ ]]; then
             echo "usage: invalid memory address – no .bin file is produced"
